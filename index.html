@@ -1,76 +1,132 @@
 <!DOCTYPE html>
 <html lang="ar">
+
 <head>
   <meta charset="UTF-8" />
-    <title>جاري تسجيل الدخول</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جاري تسجيل الدخول</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <style>
-            body {
-                  margin: 0;
-                        height: 100vh;
-                              background: linear-gradient(135deg, #1e293b, #0f172a);
-                                    display: flex;
-                                          align-items: center;
-                                                justify-content: center;
-                                                      font-family: system-ui, -apple-system, BlinkMacSystemFont;
-                                                            color: #fff;
-                                                                }
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      color: #fff;
+    }
 
-                                                                    .card {
-                                                                          background: rgba(255, 255, 255, 0.08);
-                                                                                backdrop-filter: blur(10px);
-                                                                                      padding: 40px 50px;
-                                                                                            border-radius: 18px;
-                                                                                                  text-align: center;
-                                                                                                        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-                                                                                                              max-width: 360px;
-                                                                                                                    width: 100%;
-                                                                                                                        }
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      padding: 40px 50px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      max-width: 360px;
+      width: 100%;
+    }
 
-                                                                                                                            .loader {
-                                                                                                                                  width: 48px;
-                                                                                                                                        height: 48px;
-                                                                                                                                              border: 4px solid rgba(255,255,255,0.2);
-                                                                                                                                                    border-top-color: #38bdf8;
-                                                                                                                                                          border-radius: 50%;
-                                                                                                                                                                animation: spin 1s linear infinite;
-                                                                                                                                                                      margin: 0 auto 25px;
-                                                                                                                                                                          }
+    /* شريط التحميل */
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 25px;
+    }
 
-                                                                                                                                                                              @keyframes spin {
-                                                                                                                                                                                    to { transform: rotate(360deg); }
-                                                                                                                                                                                        }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-                                                                                                                                                                                            h1 {
-                                                                                                                                                                                                  font-size: 1.3rem;
-                                                                                                                                                                                                        margin-bottom: 10px;
-                                                                                                                                                                                                            }
+    /* دائرة الصح */
+    .checkmark-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      box-sizing: border-box;
+      padding: 7px;
+    }
 
-                                                                                                                                                                                                                p {
-                                                                                                                                                                                                                      opacity: 0.85;
-                                                                                                                                                                                                                            font-size: 0.95rem;
-                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                  </style>
-                                                                                                                                                                                                                                  </head>
-                                                                                                                                                                                                                                  <body>
+    /* علامة الصح داخل الدائرة */
+    .checkmark-circle svg {
+      width: 35px;
+      height: 35px;
+      stroke: #38bdf8;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      transform: scale(0);
+      transition: transform 0.3s ease 0.3s;
+    }
 
-                                                                                                                                                                                                                                    <div class="card">
-                                                                                                                                                                                                                                        <div class="loader"></div>
-                                                                                                                                                                                                                                            <h1>جاري تسجيل الدخول</h1>
-                                                                                                                                                                                                                                                <p>سيتم الرجوع تلقائيًا خلال لحظات…</p>
-                                                                                                                                                                                                                                                  </div>
+    .checkmark-circle.success svg {
+      transform: scale(0.8);
+    }
 
-                                                                                                                                                                                                                                                    <script>
-                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                            const params = window.location.search + window.location.hash;
+    h1 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
 
-                                                                                                                                                                                                                                                                const appScheme = "linknote://login";
+    p {
+      opacity: 0.85;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
 
-                                                                                                                                                                                                                                                                    setTimeout(() => {
-                                                                                                                                                                                                                                                                          window.location.href = appScheme + params;
-                                                                                                                                                                                                                                                                              }, 800);
-                                                                                                                                                                                                                                                                                </script>
+<body>
+  <div class="card">
+    <div class="loader"></div>
+    <h1>جاري تسجيل الدخول</h1>
+    <p>سيتم الرجوع تلقائيًا خلال لحظات…</p>
+  </div>
 
-                                                                                                                                                                                                                                                                                </body>
-                                                                                                                                                                                                                                                                                </html>
+  <script>
+    const params = window.location.search + window.location.hash;
+    const appScheme = "linknote://login";
+
+    setTimeout(() => {
+      const card = document.querySelector('.card');
+
+      // إزالة شريط التحميل
+      const loader = document.querySelector('.loader');
+      loader.remove();
+
+      // إضافة دائرة الصح مع SVG
+      const check = document.createElement('div');
+      check.classList.add('checkmark-circle', 'success');
+      check.innerHTML = `
+        <svg viewBox="0 0 24 24">
+          <polyline points="4 12 10 18 20 6"/>
+        </svg>
+      `;
+      card.prepend(check);
+
+      // تغيير النصوص
+      document.querySelector('h1').textContent = 'تم تسجيل دخولك بنجاح';
+      document.querySelector('p').textContent = 'يمكنك إغلاق الصفحة.';
+
+      // إعادة التوجيه بعد ثانية واحدة
+      setTimeout(() => {
+        window.location.href = appScheme + params;
+      }, 1000);
+    }, 800);
+  </script>
+</body>
+
+</html>
